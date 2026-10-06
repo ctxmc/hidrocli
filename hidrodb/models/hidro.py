@@ -639,8 +639,8 @@ class Rain(HidroBaseModel):
         return cls(**kwargs)
 
 
-class DischargeSummary(HidroBaseModel):
-    """ Database model for storing Discharge Summary  data. """
+class DischargeMeasurement(HidroBaseModel):
+    """ Database model for storing Discharge Measurements summary data. """
 
     __tablename__ = 'ResumoDescarga'
     __table_args__ = (
@@ -914,8 +914,8 @@ class Stage(HidroBaseModel):
         return cls(**kwargs)
 
 
-class DischargeFlow(HidroBaseModel):
-    """ Database model for storing Discharge Flow data. """
+class RatingCurve(HidroBaseModel):
+    """ Database model for storing Rating Curve data. """
 
     __tablename__ = 'CurvaDescarga'
     __table_args__ = (
