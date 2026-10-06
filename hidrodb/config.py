@@ -64,7 +64,7 @@ def setup_arguments():
                         choices=['Chuvas', 'ResumoDescarga', 'Sedimentos',
                                  'Cotas', 'Vazoes', 'Granulometria',
                                  'CurvaDescarga', 'QualAgua', 'PerfilTransversal'],
-                        help='Skip job creation and requesition for the given choices')
+                        help='Runs only the choosen Jobs')
 
     parser.add_argument('--stations', default=[], nargs='*',
                         help='Stations codes to request data')

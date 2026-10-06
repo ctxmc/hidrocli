@@ -37,8 +37,7 @@ options:
                         Skip job creation and requesition for the given
                         choices
   --run-for [{Chuvas,ResumoDescarga,Sedimentos,Cotas,Vazoes,Granulometria,CurvaDescarga,QualAgua,PerfilTransversal} ...]
-                        Skip job creation and requesition for the given
-                        choices
+                        Runs only the choosen Jobs
   --stations [STATIONS ...]
                         Stations codes to request data
 
