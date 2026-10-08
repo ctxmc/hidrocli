@@ -27,14 +27,14 @@ from unittest.mock import patch, MagicMock
 
 from datetime import datetime, timedelta
 
-import hidrodb.jobs
+import hidrocli.jobs
 
-@patch('hidrodb.jobs.count_client')
-@patch('hidrodb.jobs.add_token')
-@patch('hidrodb.jobs.update_token')
-@patch('hidrodb.jobs.get_credentials')
-@patch('hidrodb.jobs.request_token')
-@patch('hidrodb.jobs.get_token_model')
+@patch('hidrocli.jobs.count_client')
+@patch('hidrocli.jobs.add_token')
+@patch('hidrocli.jobs.update_token')
+@patch('hidrocli.jobs.get_credentials')
+@patch('hidrocli.jobs.request_token')
+@patch('hidrocli.jobs.get_token_model')
 def test_get_token_add_new_token(mock_model,  mock_request, mock_creds,
                                  mock_update, mock_add,     mock_count):
     mock_model.return_value   = None
@@ -42,7 +42,7 @@ def test_get_token_add_new_token(mock_model,  mock_request, mock_creds,
     mock_request.return_value = ("new_token", datetime.now() + timedelta(hours=1))
     mock_count.return_value   = 0
 
-    result = hidrodb.jobs.get_token()
+    result = hidrocli.jobs.get_token()
 
     mock_model.assert_called_once()
     mock_creds.assert_called_once()
@@ -53,21 +53,22 @@ def test_get_token_add_new_token(mock_model,  mock_request, mock_creds,
 
     assert result == "new_token"
 
-@patch('hidrodb.jobs.trigger_job')
-@patch('hidrodb.jobs.insert_jobs')
-@patch('hidrodb.jobs.count_job')
+@patch('hidrocli.jobs.trigger_job')
+@patch('hidrocli.jobs.insert_jobs')
+@patch('hidrocli.jobs.count_job')
 @pytest.mark.parametrize("job_config", [
-    hidrodb.jobs.JobConfig.Base.BASIN,
-    hidrodb.jobs.JobConfig.Base.SUB_BASIN,
-    hidrodb.jobs.JobConfig.Base.ENTITY,
-    hidrodb.jobs.JobConfig.Base.TOWNSHIP,
-    hidrodb.jobs.JobConfig.Base.RIVER,
-    hidrodb.jobs.JobConfig.Base.STATE,
+    hidrocli.jobs.JobConfig.Base.BASIN,
+    hidrocli.jobs.JobConfig.Base.SUB_BASIN,
+    hidrocli.jobs.JobConfig.Base.ENTITY,
+    hidrocli.jobs.JobConfig.Base.TOWNSHIP,
+    hidrocli.jobs.JobConfig.Base.RIVER,
+    hidrocli.jobs.JobConfig.Base.STATE,
 ])
 def test_check_base_job(mock_count_jobs, mock_insert_jobs, mock_trigger_job, job_config):
+    """TODO"""
 
     mock_count_jobs.side_effect = [0, 1, 1, 1, 0]
-    hidrodb.jobs.check_base_job(job_config)
+    hidrocli.jobs.check_base_job(job_config)
     mock_insert_jobs.assert_called_once()
     mock_trigger_job.assert_called_once()
 
@@ -90,7 +91,7 @@ CORRUPTED_DATES_PARAMS = [
 def test_process_period_returns_corrupted_for_invalid_dates(station_code, start_date, end_date, expected_status):
     """Test that process_period returns CORRUPTED status when FromDate > ToDate."""
 
-    from hidrodb.jobs import JobConfig, process_period
+    from hidrocli.jobs import JobConfig, process_period
     result = process_period(station_code, start_date, end_date, JobConfig.Series.RAIN)
 
     assert len(result) == 1, f"Expected 1 job, got {len(result)}"
@@ -104,9 +105,9 @@ def test_process_period_returns_corrupted_for_invalid_dates(station_code, start_
 def test_process_period_returns_corrupted_for_future_date():
     """Test that future start date returns CORRUPTED."""
 
-    from hidrodb.jobs import JobConfig, process_period
+    from hidrocli.jobs import JobConfig, process_period
     future_date = (datetime.today() + timedelta(days=365)).strftime("%Y-%m-%d %H:%M:%S")
-    result = hidrodb.jobs.process_period(123456, future_date, "2020-01-01 00:00:00", JobConfig.Series.RAIN)
+    result = hidrocli.jobs.process_period(123456, future_date, "2020-01-01 00:00:00", JobConfig.Series.RAIN)
 
     assert len(result) == 1
     assert result[0].Status == 4
@@ -119,18 +120,18 @@ def _load_json_file(job_config):
 
 
 @pytest.mark.parametrize("job_config", [
-    hidrodb.jobs.JobConfig.Base.BASIN,
-    hidrodb.jobs.JobConfig.Series.RAIN,
+    hidrocli.jobs.JobConfig.Base.BASIN,
+    hidrocli.jobs.JobConfig.Series.RAIN,
 ])
 def test_convert_json_items(job_config):
-    items = hidrodb.jobs.convert_json_items(job_config, _load_json_file(job_config))
+    items = hidrocli.jobs.convert_json_items(job_config, _load_json_file(job_config))
     match job_config:
-        case hidrodb.jobs.JobConfig.Base.BASIN:
+        case hidrocli.jobs.JobConfig.Base.BASIN:
             for item in items:
                 assert isinstance(item["Data_Ultima_Alteracao"], (datetime, type(None)))
                 assert isinstance(item["Nome_Bacia"], str)
                 assert isinstance(item["codigobacia"], int)
-        case hidrodb.jobs.JobConfig.Series.RAIN:
+        case hidrocli.jobs.JobConfig.Series.RAIN:
             for item in items:
                 for i in range(1, 32):
                     assert isinstance(item[f'Chuva_{i:02d}'], (float, type(None)))
@@ -151,9 +152,9 @@ def test_convert_json_items(job_config):
 
 
 @pytest.mark.parametrize("job_config", [
-    hidrodb.jobs.JobConfig.Series.RAIN,
+    hidrocli.jobs.JobConfig.Series.RAIN,
 ])
 def test_filter_repeated_series_items(job_config):
-    items = hidrodb.jobs.convert_json_items(job_config, _load_json_file(job_config))
-    filtered = hidrodb.jobs.filter_repeated_series_items(job_config, items)
+    items = hidrocli.jobs.convert_json_items(job_config, _load_json_file(job_config))
+    filtered = hidrocli.jobs.filter_repeated_series_items(job_config, items)
     assert len(items) != len(filtered)

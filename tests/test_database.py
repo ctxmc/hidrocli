@@ -25,12 +25,12 @@
 import pytest
 from unittest.mock import patch
 
-from hidrodb.database import *
-from hidrodb.database import _setup_db
+from hidrocli.database import *
+from hidrocli.database import _setup_db
 
 DATABASE_PARAMS = [
-    ("hidro.db",  'hidrodb.database.hidro.HIDRO_PATH',  DatabaseType.HIDRO),
-    ("client.db", 'hidrodb.database.client.CLIENT_PATH', DatabaseType.CLIENT),
+    ("hidro.db",  'hidrocli.database.hidro.HIDRO_PATH',  DatabaseType.HIDRO),
+    ("client.db", 'hidrocli.database.client.CLIENT_PATH', DatabaseType.CLIENT),
 ]
 
 @pytest.fixture(params=DATABASE_PARAMS)
@@ -46,8 +46,8 @@ def db_connection(tmp_path, request):
 def test_init_db(tmp_path):
     """TODO."""
 
-    import hidrodb.database.hidro as hidro
-    import hidrodb.database.client as client
+    import hidrocli.database.hidro as hidro
+    import hidrocli.database.client as client
     assert hidro.HIDRO_DB is None
     assert client.CLIENT_DB is None
     hidro_path  = str(tmp_path / "hidro.db")

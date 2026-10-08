@@ -25,19 +25,19 @@
 import pytest
 from unittest.mock import patch
 
-import hidrodb.config
+import hidrocli.config
 
 def test_setup_arguments_defaults():
     """Test default argument values"""
 
     with patch('sys.argv', ['script_name']):
-        import hidrodb.jobs
-        hidrodb.config.setup_arguments()
-        assert hidrodb.config.LOG_LEVEL   == 'INFO'
-        assert hidrodb.config.CLIENT_PATH == 'db/client.db'
-        assert hidrodb.config.HIDRO_PATH  == 'db/hidro.db'
-        assert hidrodb.jobs.MAX_WORKERS   == 10
-        assert hidrodb.jobs.BATCH_SIZE    == 1000
+        import hidrocli.jobs
+        hidrocli.config.setup_arguments()
+        assert hidrocli.config.LOG_LEVEL   == 'INFO'
+        assert hidrocli.config.CLIENT_PATH == 'db/client.db'
+        assert hidrocli.config.HIDRO_PATH  == 'db/hidro.db'
+        assert hidrocli.jobs.MAX_WORKERS   == 10
+        assert hidrocli.jobs.BATCH_SIZE    == 1000
 
 
 def test_setup_arguments_custum():
@@ -51,22 +51,22 @@ def test_setup_arguments_custum():
                       '--client',      'custom/client.db']
 
     with patch('sys.argv', test_arguments):
-        import hidrodb.jobs, hidrodb.database
+        import hidrocli.jobs, hidrocli.database
 
-        hidrodb.config.setup_arguments()
-        assert hidrodb.config.LOG_LEVEL   == 'DEBUG'
-        assert hidrodb.config.CLIENT_PATH == 'custom/client.db'
-        assert hidrodb.config.HIDRO_PATH  == 'custom/hidro.db'
-        assert hidrodb.jobs.MAX_WORKERS   == 5
-        assert hidrodb.jobs.BATCH_SIZE    == 500
+        hidrocli.config.setup_arguments()
+        assert hidrocli.config.LOG_LEVEL   == 'DEBUG'
+        assert hidrocli.config.CLIENT_PATH == 'custom/client.db'
+        assert hidrocli.config.HIDRO_PATH  == 'custom/hidro.db'
+        assert hidrocli.jobs.MAX_WORKERS   == 5
+        assert hidrocli.jobs.BATCH_SIZE    == 500
 
 
 def test_setup_logger_creates_custom_levels(caplog):
 
     import logging;
     VERBOSE = 5
-    hidrodb.config.LOG_LEVEL = VERBOSE
-    hidrodb.config.setup_logger()
+    hidrocli.config.LOG_LEVEL = VERBOSE
+    hidrocli.config.setup_logger()
     caplog.set_level(VERBOSE)
 
     logging.getLogger().trace("trace message")

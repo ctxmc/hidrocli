@@ -23,11 +23,11 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 def main() -> None:
-    import hidrodb.jobs;
-    hidrodb.jobs.run()
+    import hidrocli.jobs;
+    hidrocli.jobs.run()
 
 if __name__ == "__main__":
-    import hidrodb.config as config;
+    import hidrocli.config as config;
     config.setup_arguments()
     config.setup_logger()
     config.setup_database()

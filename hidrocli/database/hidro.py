@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 from typing import List
 
-from hidrodb.models.hidro  import *
+from hidrocli.models.hidro  import *
 
 HIDRO_DB = None
 

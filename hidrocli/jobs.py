@@ -37,10 +37,10 @@ from datetime    import datetime, timedelta
 from enum        import Enum, auto, StrEnum
 from dataclasses import dataclass
 
-from hidrodb.database.client import *
-from hidrodb.database.hidro  import *
+from hidrocli.database.client import *
+from hidrocli.database.hidro  import *
 
-from hidrodb.webservices import *
+from hidrocli.webservices import *
 
 MAX_WORKERS      = None
 BATCH_SIZE       = None

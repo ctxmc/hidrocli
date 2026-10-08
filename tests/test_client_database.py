@@ -25,8 +25,8 @@
 import pytest
 from unittest.mock import patch
 
-from hidrodb.database        import *
-from hidrodb.database.client import *
+from hidrocli.database        import *
+from hidrocli.database.client import *
 
 @pytest.fixture
 def client_db(tmp_path):
@@ -34,15 +34,16 @@ def client_db(tmp_path):
 
     db_path = str(tmp_path / "client.db")
     db_type = DatabaseType.CLIENT
-    from hidrodb.database import _setup_db
+    from hidrocli.database import _setup_db
     connection = _setup_db(db_path, db_type)
-    with patch('hidrodb.database.client.CLIENT_DB', connection):
+    with patch('hidrocli.database.client.CLIENT_DB', connection):
         yield connection
         ClientBase.metadata.drop_all(connection.engine)
         connection.close()
 
 
 def test_insert_credentials_creates_entry(client_db):
+    """TODO."""
 
     insert_credentials(user_id="test_user", password="test_pass")
     session = client_db.get_session()

@@ -55,10 +55,10 @@ def _setup_db(db_path, db_type) -> None:
     db = DatabaseConnection(db_path, db_type)
     match db.type:
         case DatabaseType.HIDRO:
-            from hidrodb.models.hidro import HidroBase
+            from hidrocli.models.hidro import HidroBase
             HidroBase.metadata.create_all(db.engine)
         case DatabaseType.CLIENT:
-            from hidrodb.models.client import ClientBase
+            from hidrocli.models.client import ClientBase
             ClientBase.metadata.create_all(db.engine)
     return db
 

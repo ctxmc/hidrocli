@@ -25,9 +25,9 @@
 import pytest
 from unittest.mock import patch
 
-from hidrodb.database import *
-from hidrodb.database import _setup_db
-from hidrodb.database.hidro import *
+from hidrocli.database import *
+from hidrocli.database import _setup_db
+from hidrocli.database.hidro import *
 
 @pytest.fixture
 def hidro_db(tmp_path):
@@ -35,7 +35,7 @@ def hidro_db(tmp_path):
     db_path = str(tmp_path / "hidro.db")
     db_type = DatabaseType.HIDRO
     connection = _setup_db(db_path, db_type)
-    with patch('hidrodb.database.hidro.HIDRO_DB', connection):
+    with patch('hidrocli.database.hidro.HIDRO_DB', connection):
         yield connection
         HidroBase.metadata.drop_all(connection.engine)
         connection.close()

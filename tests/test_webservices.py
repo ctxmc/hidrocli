@@ -28,9 +28,9 @@ from unittest.mock import patch, Mock
 import requests
 import json
 
-from hidrodb.webservices import *
+from hidrocli.webservices import *
 
-@patch('hidrodb.webservices.requests.get')
+@patch('hidrocli.webservices.requests.get')
 def test_request_hidro_ws_success(mock_get):
     """Test successful request returns JSON."""
 
@@ -50,8 +50,8 @@ def test_request_hidro_ws_success(mock_get):
     )
 
 
-@patch('hidrodb.webservices.requests.get')
-@patch('hidrodb.webservices.time.sleep')
+@patch('hidrocli.webservices.requests.get')
+@patch('hidrocli.webservices.time.sleep')
 def test_request_hidro_ws_error(mock_sleep, mock_get):
     """Test sleep on 503 code."""
 
@@ -67,7 +67,7 @@ def test_request_hidro_ws_error(mock_sleep, mock_get):
     mock_sleep.assert_called_once_with(1)
 
 
-@patch('hidrodb.webservices.requests.get')
+@patch('hidrocli.webservices.requests.get')
 def test_request_hidro_ws_json_exception(mock_get):
     """Test handling of JSON decode error on successful response."""
 
@@ -81,7 +81,7 @@ def test_request_hidro_ws_json_exception(mock_get):
     assert result is None
 
 
-@patch('hidrodb.webservices.request_hidro_ws')
+@patch('hidrocli.webservices.request_hidro_ws')
 def test_request_token_success(mock_request):
     """Test successful token retrieval."""
 
@@ -109,8 +109,8 @@ def test_request_token_success(mock_request):
     )
 
 
-@patch('hidrodb.webservices.request_hidro_ws')
-@patch('hidrodb.webservices.time.sleep')
+@patch('hidrocli.webservices.request_hidro_ws')
+@patch('hidrocli.webservices.time.sleep')
 def test_request_token_retry_then_success(mock_sleep, mock_request):
     """Test retry logic when first attempt fails."""
     mock_request.side_effect = [
@@ -130,8 +130,8 @@ def test_request_token_retry_then_success(mock_sleep, mock_request):
     mock_sleep.assert_called_once_with(2)
 
 
-@patch('hidrodb.webservices.request_hidro_ws')
-@patch('hidrodb.webservices.time.sleep')
+@patch('hidrocli.webservices.request_hidro_ws')
+@patch('hidrocli.webservices.time.sleep')
 def test_request_token_all_retries_fail(mock_sleep, mock_request):
     """Test that exception is raised after all retries fail."""
 

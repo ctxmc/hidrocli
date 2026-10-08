@@ -27,7 +27,7 @@ from sqlalchemy.sql import elements
 
 from typing import List
 
-from hidrodb.models.client import *
+from hidrocli.models.client import *
 
 CLIENT_DB   = None
 

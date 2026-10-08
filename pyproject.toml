@@ -1,5 +1,5 @@
 [project]
-name = "HidroDB"
+name = "HidroCLI"
 version = "0.0.0"
 dependencies = ["requests", "sqlalchemy"]
 
@@ -9,7 +9,7 @@ release  = ["python-semantic-release"]
 examples = ["plotly", "geobr"]
 
 [tool.setuptools.packages.find]
-include = ["hidrodb"]
+include = ["hidrocli"]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
@@ -29,17 +29,17 @@ python_files     = ["test_*.py"]
 python_functions = ["test_*"]
 
 [tool.coverage.run]
-source = ["hidrodb"]
+source = ["hidrocli"]
 
 [[tool.pydoc-markdown.loaders]]
 type = "python"
-search_path = [ "./hidrodb" ]
+search_path = [ "./hidrocli" ]
 
 [tool.pydoc-markdown.renderer]
 type = "mkdocs"
 output_directory = "wiki"
 content_directory_name = "./"
-mkdocs_config = {site_name = "HidroDB", repo_url  = "https://github.com/ctxmc/hidrodb"}
+mkdocs_config = {site_name = "HidroCLI", repo_url  = "https://github.com/ctxmc/hidrocli"}
 
 [[tool.pydoc-markdown.renderer.pages]]
 title  = "Home"

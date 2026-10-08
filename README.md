@@ -1,4 +1,4 @@
-# HidroDB
+# HidroCLI
 
 An python application tool to request and sync data from ANA Hidro WebServices.
 
@@ -13,7 +13,7 @@ An python application tool to request and sync data from ANA Hidro WebServices.
 ## Usage
 
 ```
-usage: hidrodb [-h] [--hidro HIDRO] [--client CLIENT]
+usage: hidrocli [-h] [--hidro HIDRO] [--client CLIENT]
                [--max-workers MAX_WORKERS] [--batch-size BATCH_SIZE]
                [--log-level {TRACE,VERBOSE,DEBUG,INFO,WARNING,ERROR}]
                [--skip-series-jobs]
@@ -45,11 +45,11 @@ options:
 
 ## Documentation
 
-- [WebServices](https://github.com/ctxmc/hidrodb/wiki/webservices)
-- [Hidro Database](https://github.com/ctxmc/hidrodb/wiki/hidro-database)
-- [Client Database](https://github.com/ctxmc/hidrodb/wiki/client-database)
-- [Hidro Models](https://github.com/ctxmc/hidrodb/wiki/hidro-models)
-- [Client Models](https://github.com/ctxmc/hidrodb/wiki/client-models)
-- [Config](https://github.com/ctxmc/hidrodb/wiki/config)
-- [Jobs](https://github.com/ctxmc/hidrodb/wiki/jobs)
-- [Use Cases](https://github.com/ctxmc/hidrodb/wiki/Use-Cases)
+- [WebServices](https://github.com/ctxmc/hidrocli/wiki/webservices)
+- [Hidro Database](https://github.com/ctxmc/hidrocli/wiki/hidro-database)
+- [Client Database](https://github.com/ctxmc/hidrocli/wiki/client-database)
+- [Hidro Models](https://github.com/ctxmc/hidrocli/wiki/hidro-models)
+- [Client Models](https://github.com/ctxmc/hidrocli/wiki/client-models)
+- [Config](https://github.com/ctxmc/hidrocli/wiki/config)
+- [Jobs](https://github.com/ctxmc/hidrocli/wiki/jobs)
+- [Use Cases](https://github.com/ctxmc/hidrocli/wiki/Use-Cases)

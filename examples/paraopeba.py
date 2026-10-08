@@ -24,8 +24,8 @@
 
 from sqlalchemy           import select, func
 
-import hidrodb.database   as db
-from hidrodb.models.hidro import Station, Stage
+import hidrocli.database   as db
+from hidrocli.models.hidro import Station, Stage
 
 HIDRO_DB = db.DatabaseConnection("db/hidro.db", db.DatabaseType.HIDRO)
 

@@ -23,7 +23,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import pytest
-from hidrodb.models.client import *
+from hidrocli.models.client import *
 
 def test_dummy():
     assert True

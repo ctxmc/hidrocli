@@ -23,7 +23,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Provides general config to HidroDB application.
+Provides general config to HidroCLI application.
 """
 
 LOG_LEVEL   = None
@@ -76,14 +76,13 @@ def setup_arguments():
     HIDRO_PATH  = args.hidro
     CLIENT_PATH = args.client
 
-
-    import hidrodb.jobs as jobs
-    jobs.SKIP_SERIES_JOBS = args.skip_series_jobs
-    jobs.SKIP_FOR         = args.skip_for
-    jobs.RUN_FOR          = args.run_for
-    jobs.STATIONS         = args.stations
-    jobs.MAX_WORKERS      = args.max_workers
-    jobs.BATCH_SIZE       = args.batch_size
+    import hidrocli.jobs as jobs
+    jobs.SKIP_SERIES_JOBS    = args.skip_series_jobs
+    jobs.SKIP_FOR            = args.skip_for
+    jobs.RUN_FOR             = args.run_for
+    jobs.STATIONS            = args.stations
+    jobs.MAX_WORKERS         = args.max_workers
+    jobs.BATCH_SIZE          = args.batch_size
 
 
 def setup_logger():
@@ -113,8 +112,8 @@ def _make_logger(level):
 def setup_database():
     """ Setup Hidro and Client Database. """
 
-    import hidrodb.database        as db
-    import hidrodb.database.client as client
+    import hidrocli.database        as db
+    import hidrocli.database.client as client
     db.init_db(HIDRO_PATH, CLIENT_PATH)
     if not client.check_credentials():
         user_id = input("Enter API username: ")
